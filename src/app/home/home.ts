@@ -9,25 +9,22 @@ import { Observable } from 'rxjs/Observable';
 import {APP_BASE_HREF, 
   LocationStrategy, 
   HashLocationStrategy} from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { appRoutes } from './routes';
 
 @Component({
-  selector: 'smartreferralweb-app',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'home',
+  templateUrl: './home.html'
 })
 
-export class AppComponent {
 
+export class Home {
+  
   constructor() {
    
   }
   
   ngOnInit() {
-
+     
   }
+ 
 
 }
-
-

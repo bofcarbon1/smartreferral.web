@@ -1,0 +1,16 @@
+<div class="col-md-12">
+<h3>Candidates</h3>
+<ul>
+  <li *ngFor = "let candidate of allcandidates">
+    <a [routerLink]="['candidate-upd', {id : candidate.candidate_ID} ]" routerLinkActive="active">
+       {{candidate.candidate_name}}  </a>
+    <span> -- {{candidate.candidate_phone}} -- {{candidate.candidate_email}} -- {{candidate.candidate_note}}</span>
+    <a [routerLink]="['candidate-del', {id : candidate.candidate_ID} ]" routerLinkActive="active">
+       Delete </a>
+  </li>
+</ul>
+<br/>
+<a [routerLink]="['candidate-upd', {id : 0} ]" routerLinkActive="active">Add candidate</a>
+<br/>
+<br/>
+</div>

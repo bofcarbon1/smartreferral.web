@@ -1,0 +1,19 @@
+<span *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}
+</span>
+<span *ngIf="successMessage" class="alert alert-success">{{successMessage}}
+<a [routerLink]="['/candidate-home']" [queryParams]="{}" routerLinkActive="active"> -- Return to Candidates</a>
+</span>
+<br>
+
+<div class="row" style="background-color:lightgray" >
+    <div class="col-md-12">
+        <form class="form col-md-4" [hidden]="submitted">
+            <h3>Candidate Delete</h3>
+            <p>Are you sure you want to delete candidate {{candidateName}}?</p> 
+        </form>
+        <br>
+        <div class="container" [hidden]="submitted">
+           <button class="btn btn-primary" (click)="delCandidate()">Confirm</button>
+        </div>
+    </div>
+</div>
