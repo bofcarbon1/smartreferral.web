@@ -101,40 +101,40 @@ https://github.com/softsimon/angular-2-dropdown-multiselect
 
 ## Application Modules
 
-•	App
-    o	‘app-module.ts’ 
-        	Configuration and bootstrapping the smartreferralweb app
-    o	‘app-component.ts’
-        	The main component and class for the smartreferralweb app
-    o	‘app-component.html’
-        	The main view for the smartreferralweb app
-    o	‘netcore2.service.ts’
-        	A service that handles all data requests including a .NET Core 2.0 Api
-        	Imports script ‘rxjs/Rx’ and associated scripts for use of Observable Api calls
-        	Performs REST http requests to .NET Core 2.0 Api ‘SmartReferralCore2Api’ with a ‘map’ callback option to return a response in json format
-        	Handles data requests for candidate, skill, candidate skill. 
-    o	‘route.ts’
-        	Imports RouterModule to map templates to component classes for URL routing 
-    	 
-    o	Candidate 
-        	‘candidate.ts’, ‘candidateHome.ts’, ‘candidateHome.html’, update.candidate.ts’, ‘update.candidate.html’, ‘delete.candidate.ts’, ‘delete.candidate.html’
-            •	Handle all candidate updates via reactive forms using ‘FormBuilder’. Uses service ‘netcore2.service.ts’ to handle all data requests/responses
-    o	Skill 
-        	‘skill.ts’, ‘skill.home.ts’, ‘skill.home.html‘, ‘update.skill.ts’ and ‘update.skill.html’
-            •	Handle all skill updates via reactive forms using ‘FormBuilder’. Uses service ‘netcore2.service.ts’ to handle all data requests/responses. 
-        	‘update.skill.category.ts’, ‘update.skill.category.html’
-            •	Handle all skill category updates via reactive forms using ‘FormBuilder’. Uses ‘netcore2.service.ts’ to handle all data requests/responses.
-    o	Candidate-Skill
-        	‘candidate.skill.ts’, ‘candidate.skill.home.ts’, ‘candidate.skill.home.html’, ‘delete.candidte.skill.ts’, ‘delete.candidate.skill.html’
-            •	Same as above
-        	‘update.candidate.skill.ts’, ‘update.candidate.skill.html’
-            •	Includes a multi-select dropdown control for adding one or more skills at a time. Skills loaded to this control per candidate will retrieve all skills that do not currently exist in the candidate’s skill list. 
-    o	Reports
-        	‘candidate.report.ts’
-            •	Display a list of candidates with points for all of the criteria categories and a point total that adds those up. 
-            •	Uses a sortable table by name or total points
-        	‘skill.match.ts’
-            •	Allow multiple selection of skills to search. Search button will send json array of skill IDs to retrieve candidate skills then iterate through the results adding up the total skill match count.
-            •	Display a list of candidates sortable by skill match percentage. It will calculate a percentage using the skill match count for each obtained above.
-            •	Display candidate detail with skills and contact info.			
+    •	App
+        o	‘app-module.ts’ 
+            	Configuration and bootstrapping the smartreferralweb app
+        o	‘app-component.ts’
+            	The main component and class for the smartreferralweb app
+        o	‘app-component.html’
+            	The main view for the smartreferralweb app
+        o	‘netcore2.service.ts’
+            	A service that handles all data requests including a .NET Core 2.0 Api
+            	Imports script ‘rxjs/Rx’ and associated scripts for use of Observable Api calls
+            	Performs REST http requests to .NET Core 2.0 Api ‘SmartReferralCore2Api’ with a ‘map’ callback option to return a response in json format
+            	Handles data requests for candidate, skill, candidate skill. 
+        o	‘route.ts’
+            	Imports RouterModule to map templates to component classes for URL routing 
+        	 
+        o	Candidate 
+            	‘candidate.ts’, ‘candidateHome.ts’, ‘candidateHome.html’, update.candidate.ts’, ‘update.candidate.html’, ‘delete.candidate.ts’, ‘delete.candidate.html’
+                •	Handle all candidate updates via reactive forms using ‘FormBuilder’. Uses service ‘netcore2.service.ts’ to handle all data requests/responses
+        o	Skill 
+            	‘skill.ts’, ‘skill.home.ts’, ‘skill.home.html‘, ‘update.skill.ts’ and ‘update.skill.html’
+                •	Handle all skill updates via reactive forms using ‘FormBuilder’. Uses service ‘netcore2.service.ts’ to handle all data requests/responses. 
+            	‘update.skill.category.ts’, ‘update.skill.category.html’
+                •	Handle all skill category updates via reactive forms using ‘FormBuilder’. Uses ‘netcore2.service.ts’ to handle all data requests/responses.
+        o	Candidate-Skill
+            	‘candidate.skill.ts’, ‘candidate.skill.home.ts’, ‘candidate.skill.home.html’, ‘delete.candidte.skill.ts’, ‘delete.candidate.skill.html’
+                •	Same as above
+            	‘update.candidate.skill.ts’, ‘update.candidate.skill.html’
+                •	Includes a multi-select dropdown control for adding one or more skills at a time. Skills loaded to this control per candidate will retrieve all skills that do not currently exist in the candidate’s skill list. 
+        o	Reports
+            	‘candidate.report.ts’
+                •	Display a list of candidates with points for all of the criteria categories and a point total that adds those up. 
+                •	Uses a sortable table by name or total points
+            	‘skill.match.ts’
+                •	Allow multiple selection of skills to search. Search button will send json array of skill IDs to retrieve candidate skills then iterate through the results adding up the total skill match count.
+                •	Display a list of candidates sortable by skill match percentage. It will calculate a percentage using the skill match count for each obtained above.
+                •	Display candidate detail with skills and contact info.			
 
