@@ -18,6 +18,8 @@ import { Subscription } from "rxjs/Rx";
 import { Candidate} from '../candidate/candidate';
 import { NetCore2Service } from '../netcore2.service';
 import { appRoutes } from '../routes';
+import { NumberValidatorsService } from "../services/validation/number.validator.service";
+import { EmailValidator } from '@angular/forms';
 
 @Component({
   selector: 'candidate-upd',
@@ -25,7 +27,8 @@ import { appRoutes } from '../routes';
   styles: [
     `input.ng-touched.ng-invalid {
       border: 1px solid red;
-    }`
+    }
+    `
   ]
 })
 
@@ -47,18 +50,39 @@ export class UpdCandidate {
   public candidatePhone: string;
   public candidateeMail: string;
   public candidateNote: string;
+  public candidateSkillLevel: number; 
+  public candidateScreenLevel: number; 
+  public candidateCodeSampleLevel: number; 
+  public candidateVideoLevel: number; 
   private subscription: Subscription;
   param: string;
   
   constructor(private netcore2service : NetCore2Service, 
     private fb: FormBuilder, 
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private numbervalidatorservice : NumberValidatorsService
     ) {
     this.updCandidateForm = this.fb.group({
       'name': ['', Validators.required],
       'phone': ['', Validators.required],
-      'email': ['', Validators.required],
-      'note': ['', Validators.required]
+      'email': ['', Validators.email],
+      'note': ['', Validators.required],
+      'skilllevel': ['0', 
+        [Validators.required, 
+        NumberValidatorsService.max(5), 
+        NumberValidatorsService.min(0)] ],
+      'screenlevel': ['0',  
+        [Validators.required, 
+        NumberValidatorsService.max(5), 
+        NumberValidatorsService.min(0)] ],
+      'codesamplelevel': ['0', 
+        [Validators.required, 
+        NumberValidatorsService.max(5), 
+        NumberValidatorsService.min(0)] ],
+      'videolevel': ['0',  
+        [Validators.required, 
+        NumberValidatorsService.max(5), 
+        NumberValidatorsService.min(0)] ]
     });
   }
   
@@ -78,8 +102,24 @@ export class UpdCandidate {
       this.updCandidateForm = this.fb.group({
         'name': ['', Validators.required],
         'phone': ['', Validators.required],
-        'email': ['', Validators.required],
-        'note': ['', Validators.required]
+        'email': ['', Validators.email],
+        'note': ['', Validators.required],
+       'skilllevel': ['0', 
+        [Validators.required, 
+        NumberValidatorsService.max(5), 
+        NumberValidatorsService.min(0)] ],
+        'screenlevel': ['0',  
+        [Validators.required, 
+        NumberValidatorsService.max(5), 
+        NumberValidatorsService.min(0)] ],
+        'codesamplelevel': ['0',  
+        [Validators.required, 
+        NumberValidatorsService.max(5), 
+        NumberValidatorsService.min(0)] ],
+        'videolevel': ['0', 
+        [Validators.required, 
+        NumberValidatorsService.max(5), 
+        NumberValidatorsService.min(0)] ]
       });
     }
   }
@@ -105,11 +145,31 @@ export class UpdCandidate {
           this.candidatePhone = candidateParsed.candidate_phone;
           this.candidateeMail = candidateParsed.candidate_email;
           this.candidateNote = candidateParsed.candidate_note;
+          this.candidateSkillLevel = candidateParsed.candidate_skill_level;
+          this.candidateCodeSampleLevel = candidateParsed.candidate_code_sample_level;
+          this.candidateScreenLevel = candidateParsed.candidate_screen_level;
+          this.candidateVideoLevel = candidateParsed.candidate_video_level;
           this.updCandidateForm = this.fb.group({
             'name': [this.candidateName, Validators.required],
             'phone': [this.candidatePhone, Validators.required],
-            'email': [this.candidateeMail, Validators.required],
-            'note': [this.candidateNote, Validators.required]
+            'email': [this.candidateeMail, Validators.email],
+            'note': [this.candidateNote, Validators.required],
+            'skilllevel': [this.candidateSkillLevel, 
+              [Validators.required, 
+              NumberValidatorsService.max(5), 
+              NumberValidatorsService.min(0)] ],
+            'screenlevel': [this.candidateScreenLevel, 
+              [Validators.required, 
+              NumberValidatorsService.max(5), 
+              NumberValidatorsService.min(0)] ],
+            'codesamplelevel': [this.candidateCodeSampleLevel, 
+              [Validators.required, 
+              NumberValidatorsService.max(5), 
+              NumberValidatorsService.min(0)] ],
+            'videolevel': [this.candidateVideoLevel, 
+              [Validators.required, 
+              NumberValidatorsService.max(5), 
+              NumberValidatorsService.min(0)] ]
             });
           }
       );
@@ -119,16 +179,14 @@ export class UpdCandidate {
     let model;
     this.submitted = true;
     model = this.updCandidateForm.value;
-    //We created a Work around using the 'change' event on the form
-    //with each project control. We save the changes that way now.
-    //We now have to check to see if we have a changed value and override
-    //whatever value we have coming from the form during an update
-    //We should not have to do this if we have two way binding 
-    //Next to do is to remove the need save each change on the form
     model.candidate_name = this.candidateName;
     model.candidate_phone = this.candidatePhone;
     model.candidate_email = this.candidateeMail;
     model.candidate_note = this.candidateNote;
+    model.candidate_skill_level = this.candidateSkillLevel;
+    model.candidate_screen_level = this.candidateScreenLevel;
+    model.candidate_code_sample_level = this.candidateCodeSampleLevel;
+    model.candidate_video_level = this.candidateVideoLevel;
     let cand = new Candidate();
     Object.assign(cand, model);
     //We use our service for data requests not the collection
@@ -199,6 +257,26 @@ export class UpdCandidate {
   //Workaround to be removed with up to date form
   modifiedNote (notevalue) {
     this.candidateNote = notevalue;
+  }
+  
+  //Store the skill level value from form
+  modifiedSkillLevel (skilllevelvalue) {
+    this.candidateSkillLevel = skilllevelvalue;
+  }
+  
+  //Store the screen level value from form
+  modifiedScreenLevel (screenlevelvalue) {
+    this.candidateScreenLevel = screenlevelvalue;
+  }
+  
+  //Store the code sample level value from form
+  modifiedCodeSampleLevel (codesamplelevelvalue) {
+    this.candidateCodeSampleLevel = codesamplelevelvalue;
+  }
+  
+  //Store the video level value from form
+  modifiedVideoLevel (videolevelvalue) {
+    this.candidateVideoLevel = videolevelvalue;
   }
 
 

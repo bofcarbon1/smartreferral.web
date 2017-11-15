@@ -1,0 +1,69 @@
+<h5>Skills</h5>
+<div class="row"
+style="border: 1px solid black; background-color:#ffeecc;">
+<div class="col-6">
+  <br />
+  <h6>Filter by Category</h6>
+  <div>
+    <select class="form-control" #c
+    (change)="getSkillsBySkillCategory(c.value)" style="max-width:40%;">
+      <option value=0>All</option>
+      <option *ngFor="let c of allskillcategories" 
+          value={{c.skill_Category_ID}}>{{c.skill_Category_Name}}</option>
+    </select>
+  </div>
+  <table class="table table-striped table-bordered table-hover table-responsive">
+    <thead>
+      <tr>
+        <th>Skill</th>
+        <th>Action</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor = "let skill of allskills | paginate: { itemsPerPage: 5, currentPage: p };">
+        <td>{{skill.skill_Name}}</td>
+        <td>
+          <a [routerLink]="['skill-upd', {id : skill.skill_ID} ]" routerLinkActive="active">
+          Modify </a>
+        </td>
+        <td>
+          <a [routerLink]="['skill-del', {id : skill.skill_ID} ]" routerLinkActive="active">
+           Delete </a> 
+        </td>
+      </tr>
+    </tbody>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </table>
+  <a [routerLink]="['skill-upd', {id : 0} ]" routerLinkActive="active">Add skill</a>
+  <br/>
+  <br/>
+</div>
+<div class="col-6">
+  <br />
+  <h6>Categories</h6>
+  <table class="table table-striped table-bordered table-hover table-responsive">
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Action</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tr *ngFor = "let skillcategory of allskillcategories">
+      <td>{{skillcategory.skill_Category_Name}}</td>
+      <td>
+        <a [routerLink]="['skill-cat-upd', {id : skillcategory.skill_Category_ID} ]" routerLinkActive="active">
+        Modify </a>
+      </td>
+      <td>
+        <a [routerLink]="['skill-cat-del', {id : skillcategory.skill_Category_ID} ]" routerLinkActive="active">
+        Delete </a>
+      </td>
+    </tr>
+  </table>
+  <a [routerLink]="['skill-cat-upd', {id : 0} ]" routerLinkActive="active">Add skill category</a>
+  <br/>
+  <br/>
+</div>
+</div>

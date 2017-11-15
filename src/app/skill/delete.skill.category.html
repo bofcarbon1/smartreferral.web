@@ -1,0 +1,18 @@
+<span *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}
+</span>
+<span *ngIf="successMessage" class="alert alert-success">{{successMessage}}
+<a [routerLink]="['/skill-home']" [queryParams]="{}" routerLinkActive="active"> -- Return to Skills</a>
+</span>
+<br>
+<div class="row" style="background-color:lightgray" >
+    <div class="col-md-12">
+        <form class="form col-md-4" [hidden]="submitted">
+            <h3>Skill Category Delete</h3>
+            <p>Are you sure you want to delete skill category {{skillCategoryName}}?</p> 
+        </form>
+        <br>
+        <div class="container" [hidden]="submitted">
+           <button class="btn btn-primary" (click)="delSkillCategory()">Confirm</button>
+        </div>
+    </div>
+</div>

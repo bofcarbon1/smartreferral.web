@@ -1,10 +1,25 @@
 <div class="row"> 
-<p><strong>Welcome to Smart Referral!</strong></p>
-   <div class="col-md-12">
-       <nav class="navbar navbar-default" style="background-color:#b3ffff">
-          <ul class="nav navbar-nav" style="color:black; font-weight:bold"> 
-            <li><a routerLink="candidate-home" routerLinkActive="active">Candidates</a></li>
-          </ul>
+    <div class="col-12">
+        <nav class="navbar navbar-toggleable-md navbar-light bg-faded"
+        style="background-color:#b3ffff">
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav"> 
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="candidate-report" routerLinkActive="active">Candidate Report
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="skill-match-report" routerLinkActive="active">Skill Match Report
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="candidate-home" routerLinkActive="active">Candidates</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="skill-home" routerLinkActive="active">Skills</a>
+                </li>
+            </ul>
+          </div>
        </nav>
        <router-outlet></router-outlet>
     </div>

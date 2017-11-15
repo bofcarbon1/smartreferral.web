@@ -11,13 +11,27 @@ import { appRoutes } from '../routes';
 
 @Component({
   selector: 'candidateHome',
-  templateUrl: './candidateHome.html'
+  templateUrl: './candidateHome.html',
+    styles: [
+    `
+    p {
+       font-size: .80em;
+    }
+    
+    table {
+      border: 1px solid black;
+      font-size: .80em;
+    }
+       
+   ` 
+    ]
 })
 
 export class CandidateHome implements OnInit {
   allcandidates:string;
   public obsCandidates:string;
   selectedCandidate: Candidate;
+  p: number = 1; //for table pagination
   
   constructor(public netcore2service : NetCore2Service) {
       

@@ -1,0 +1,73 @@
+<div class="row">
+    <div class="col-3"
+    style="border: 1px solid black; background-color:lightgray;">
+        <label class="control-label" for="skillsInput">Required Skills</label>
+        <br />
+        <ss-multiselect-dropdown [options]="skillSelects"
+            [texts]="myTexts" [settings]="mySettings"
+            [(ngModel)]="optionsModel" (ngModelChange)="onChange($event)" >
+        </ss-multiselect-dropdown>
+        <br />
+        <br>
+        <button class="btn btn-primary" (click)="getSkillsMatchCounts()">Search</button>
+    </div>
+    <div class="col-4"
+    style="border: 1px solid black; background-color:#ffeecc;">
+        <h6>Skill Match Candidates</h6>    
+        <table class="table table-striped table-bordered table-hover table-responsive">
+            <thead>
+                <tr>
+                    <th class="pointer" (click)="sort('candidate_name')">Candidate
+                    <i class="fa" 
+                    [ngClass]="{'fa-sort': column != 'candidate_name', 'fa-sort-asc': (column == 'candidate_name' && isDesc), 'fa-sort-desc': (column == 'candidate_name' && !isDesc) }" aria-hidden="true"> </i>
+                    </th>
+                    <th class="pointer" (click)="sort('matchPct')">Skill Pct Match
+                    <i class="fa" 
+                    [ngClass]="{'fa-sort': column != 'matchPct', 'fa-sort-asc': (column == 'matchPct' && isDesc), 'fa-sort-desc': (column == 'matchPct' && !isDesc) }" aria-hidden="true"> </i>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor = "let candidate of records 
+                | orderBy: {property: column, direction: direction} 
+                | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
+                    <td (click)="setCandidateDetails(candidate)">{{candidate.candidate_name}}</td>
+                    <td>{{candidate.matchPct}}</td>
+                </tr>
+            </tbody>
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </table>
+    </div>
+    <div class="col-5">
+        <div class="container">
+            <h6 class="blog-post-title">{{selectedCandidate.candidate_name}} </h6>
+            <p class="lead blog-description">Candidate details.....</p>
+            <div class="blog-post">
+                <h6>Summary</h6>
+                <p>{{selectedCandidate.candidate_note}}</p>
+                <h6>Skills</h6>
+                <table class="table table-striped table-bordered table-hover table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Level</th>
+                            <th>Years</th>
+                            <th>Last Used</th>
+                        </tr>
+                    </thead>
+                    <tr *ngFor = "let candidateskill of allcandidateskills">
+                      <td>{{candidateskill.skill_Name}}</td>
+                      <td>{{candidateskill.level}}</td>
+                      <td>{{candidateskill.years_Used}}</td>
+                      <td>{{candidateskill.last_Year_Used}}</td>
+                    </tr>
+                </table>
+                <h6>Contact info</h6>
+                <p>
+                    phone: {{selectedCandidate.candidate_phone}} <br>
+                    email: {{selectedCandidate.candidate_email}}
+                </p>
+            </div><!-- /.blog-post -->
+        </div><!-- /.container -->
+    </div><!-- /.col-md-5 -->
+</div>

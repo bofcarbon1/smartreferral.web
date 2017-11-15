@@ -1,0 +1,64 @@
+<h5>Modify {{candidateName}} Skill: {{candidateSkillName}}</h5>
+<br>
+<span *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}
+</span>
+<span *ngIf="successMessage" class="alert alert-success">{{successMessage}}
+<a [routerLink]="['/candidate-home/candidate-skill-home', {id : candidateskill.candidate_ID}]" 
+[queryParams]="{ }" routerLinkActive="active"> -- Return to Candidate Skills</a>
+</span>
+<form [hidden]="submitted" style="border: 1px solid black; background-color:lightgray;
+font-size: .80em;">
+    <div class="form-group row" [formGroup]="updCSForm">
+        <div class="col-8">
+            <label class="col-sm-3 col-form-label" for="levelInput">Level</label>
+            <div [ngClass]="{'has-error':!updCSForm.controls['level'].valid
+            && updCSForm.controls['level'].touched}" >
+                <input id="levelInput" class="form-control" #le type="text" 
+                formControlName="level" (change)="modifiedLevel(le.value)"
+                style="width: 60px;">
+            </div>
+            <div *ngIf="( updCSForm.controls['level'].hasError('required')
+                || updCSForm.controls['level'].hasError('max')
+                || updCSForm.controls['level'].hasError('min'))
+                && updCSForm.controls['level'].touched" class="alert alert-danger">
+            You must enter a valid level between 1 and 5.  
+            </div>
+            
+            <label class="col-sm-3 col-form-label" for="yearsInput">Years Used</label>
+            <div [ngClass]="{'has-error':!updCSForm.controls['years'].valid
+              && updCSForm.controls['years'].touched}">
+              <input id="yearsInput" class="form-control" #yu type="text"  
+                formControlName="years" (change)="modifiedYearsUsed(yu.value)"
+                style="width: 60px;">
+            </div>
+            <div *ngIf="( updCSForm.controls['years'].hasError('required')
+                || updCSForm.controls['years'].hasError('max')
+                || updCSForm.controls['years'].hasError('min'))
+                && updCSForm.controls['years'].touched" class="alert alert-danger">
+            You must enter a valid number of years 1 thru 20.  
+            </div>
+            
+            <label class="col-sm-3 col-form-label" for="lastusedInput">Last Year Used</label>
+            <div [ngClass]="{'has-error':!updCSForm.controls['last'].valid
+              && updCSForm.controls['last'].touched}">
+              <input id="lastusedInput" class="form-control" #lu type="text" 
+                formControlName="last" (change)="modifiedLastUsed(lu.value)"
+                style="width: 100px;">
+            </div>
+            <div *ngIf="( updCSForm.controls['last'].hasError('required')
+                || updCSForm.controls['last'].hasError('max')
+                || updCSForm.controls['last'].hasError('min'))
+                && updCSForm.controls['last'].touched" class="alert alert-danger">
+            You must enter a valid 4 digit year between 1999 and 2019.  
+            </div>
+            <div class=container>
+                <br>
+                <button class="btn btn-primary" (click)="updCandidateSkill()" 
+                [disabled]="!updCSForm.valid">Submit</button>
+                <br>
+                <br> 
+            </div>
+        </div>
+    </div>
+</form>
+

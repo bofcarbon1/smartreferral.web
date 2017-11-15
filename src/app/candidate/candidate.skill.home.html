@@ -1,0 +1,40 @@
+<h5>Candidate {{candidateName}} Skills</h5>
+<div class="row"
+style="border: 1px solid black; background-color:#ffeecc;">
+  <div class="col-12">
+    <br>
+    <table class="table table-striped table-bordered table-hover table-responsive">
+      <thead>
+        <tr>
+          <th>Skill</th>
+          <th>Level</th>
+          <th>Years Used</th>
+          <th>Last Used</th>
+          <th>Action</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tr *ngFor = "let candidateskill of allcandidateskills">
+        <td>{{candidateskill.skill_Name}}</td>
+        <td>{{candidateskill.level}}</td>
+        <td>{{candidateskill.years_Used}}</td>
+        <td>{{candidateskill.last_Year_Used}}</td>
+        <td> 
+           <a [routerLink]="['candidate-skill-upd', {id : candidateskill.candidate_Skill_ID, name : candidateName, skillname : candidateskill.skill_Name} ]" routerLinkActive="active">
+           Modify </a>
+        </td>
+        <td>
+          <a [routerLink]="['candidate-skill-del', 
+          {csid : candidateskill.candidate_Skill_ID, cid : candidateID, name : candidateName }]" routerLinkActive="active">
+           Delete </a>
+       </td>
+      </tr>
+    </table>
+    <br/>
+    <a [routerLink]="['candidate-skill-add', 
+    {id : candidateID, name: candidateName} ]" 
+    routerLinkActive="active">Add candidate skills</a>
+    <br/>
+    <br/>
+  </div>
+</div>

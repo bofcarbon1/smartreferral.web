@@ -1,60 +1,128 @@
+<h5>Modify Candidate</h5>
+<br>
 <span *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}
 </span>
 <span *ngIf="successMessage" class="alert alert-success">{{successMessage}}
 <a [routerLink]="['/candidate-home']" [queryParams]="{}" routerLinkActive="active"> -- Return to Candidates</a>
 </span>
-<br>
-<div class="row" style="background-color:lightgray" >
-    <div class="col-md-12">
-<form class="form col-md-4" [hidden]="submitted">
-  <div class="form-group" [formGroup]="updCandidateForm">
-    <label class="control-label" for="nameInput">Candidate name</label>
-    <div [ngClass]="{'has-error':!updCandidateForm.controls['name'].valid
-      && updCandidateForm.controls['name'].touched}">
-      <input id="nameInput" class="form-control" #na type="text" 
-      formControlName="name" (change)="modifiedName(na.value)">
+<form [hidden]="submitted" 
+style="border: 1px solid black; background-color:lightgray;
+font-size: .80em;">
+  <div class="form-group row" [formGroup]="updCandidateForm">
+    <div class="col-8">
+      <label class="col-sm-3 col-form-label" for="nameInput">Name</label>
+      <div [ngClass]="{'has-error':!updCandidateForm.controls['name'].valid
+                  && updCandidateForm.controls['name'].touched}">
+        <input id="nameInput" class="form-control" #na type="text" 
+                    formControlName="name" (change)="modifiedName(na.value)"
+                    style="width: 400px;">
+      </div>
+      <div *ngIf="updCandidateForm.controls['name'].hasError('required')
+                 && updCandidateForm.controls['name'].touched" class="alert alert-danger">
+                You must enter a candidate name.  
+      </div>
+      
+      <label class="col-sm-3 col-form-label" for="phoneInput">Phone</label>
+      <div [ngClass]="{'has-error':!updCandidateForm.controls['phone'].valid
+                  && updCandidateForm.controls['phone'].touched}">
+        <input id="phoneInput" class="form-control" #p type="text"  
+                    formControlName="phone" (change)="modifiedPhone(p.value)"
+                    [formControl]="updCandidateForm.controls['phone']"
+                    style="width: 250px;">
+      </div>
+      <div *ngIf="updCandidateForm.controls['phone'].hasError('invalidPhone')
+                 && updCandidateForm.controls['phone'].touched" class="alert alert-danger">
+                You must enter a valid phone number.  
+      </div>
+    
+      <label class="col-sm-3 col-form-label" for="emailInput">eMail</label>
+      <div [ngClass]="{'has-error':!updCandidateForm.controls['email'].valid
+                  && updCandidateForm.controls['email'].touched}">
+        <input id="emailInput" class="form-control" #e type="email" 
+                    formControlName="email" (change)="modifiedeMail(e.value)"
+                    style="width: 400px;">
+      </div>
+      <div *ngIf="updCandidateForm.controls['email'].hasError('email')
+                 && updCandidateForm.controls['email'].touched" class="alert alert-danger">
+                You must enter a valid email.  
+      </div>
+            
+      <label class="col-sm-3 col-form-label" for="noteInput">Note</label>
+      <div [ngClass]="{'has-error':!updCandidateForm.controls['note'].valid
+                  && updCandidateForm.controls['note'].touched}">
+        <textarea id="noteInput" rows=5 maxlength="400" #n  
+                    formControlName="note" (change)="modifiedNote(n.value)"
+                    style="width: 600px; height:100px">
+        </textarea>
+      </div>
+      <div *ngIf="updCandidateForm.controls['note'].hasError('required')
+                 && updCandidateForm.controls['note'].touched" class="alert alert-danger">
+                You must enter a candidate note.  
+      </div>
     </div>
-    <div *ngIf="updCandidateForm.controls['name'].hasError('required')
-     && updCandidateForm.controls['name'].touched" class="alert alert-danger">
-    You must enter a candidate name.  
+    <div class="col-4">
+      <label class="control-label" for="skilllevelInput">Skill Rating</label>
+      <div [ngClass]="{'has-error':!updCandidateForm.controls['skilllevel'].valid
+                  && updCandidateForm.controls['skilllevel'].touched}" >
+        <input id="screenlevelInput" class="form-control" #skl type="text" 
+                    formControlName="skilllevel" (change)="modifiedSkillLevel(skl.value)"
+                    style="width: 60px;">
+      </div>
+      <div *ngIf="( updCandidateForm.controls['skilllevel'].hasError('required')
+        || updCandidateForm.controls['skilllevel'].hasError('max')
+        || updCandidateForm.controls['skilllevel'].hasError('min'))
+        && updCandidateForm.controls['skilllevel'].touched" class="alert alert-danger">
+        You must enter a valid numeric skill rating from 0 to 5.  
+      </div>
+      
+      <label class="control-label" for="screenlevelInput">Pre Screen Rating</label>
+      <div [ngClass]="{'has-error':!updCandidateForm.controls['screenlevel'].valid
+                  && updCandidateForm.controls['screenlevel'].touched}" >
+        <input id="screenlevelInput" class="form-control" #sl type="text" 
+                    formControlName="screenlevel" (change)="modifiedScreenLevel(sl.value)"
+                    style="width: 60px;">
+      </div>
+      <div *ngIf="( updCandidateForm.controls['screenlevel'].hasError('required')
+        || updCandidateForm.controls['screenlevel'].hasError('max')
+        || updCandidateForm.controls['screenlevel'].hasError('min'))
+        && updCandidateForm.controls['screenlevel'].touched" class="alert alert-danger">
+        You must enter a valid numeric screen rating from 0 to 5.  
+      </div>
+    
+      <label class="control-label" for="codesamplelevelInput">Code Sample Rating</label>
+      <div [ngClass]="{'has-error':!updCandidateForm.controls['codesamplelevel'].valid
+                  && updCandidateForm.controls['codesamplelevel'].touched}" >
+        <input id="codesamplelevelInput" class="form-control" #csl type="text" 
+                    formControlName="codesamplelevel" (change)="modifiedCodeSampleLevel(csl.value)"
+                    style="width: 60px;">
+      </div>
+      <div *ngIf="( updCandidateForm.controls['codesamplelevel'].hasError('required')
+        || updCandidateForm.controls['codesamplelevel'].hasError('max')
+        || updCandidateForm.controls['codesamplelevel'].hasError('min'))
+        && updCandidateForm.controls['codesamplelevel'].touched" class="alert alert-danger">
+        You must enter a valid numeric code sample rating from 0 to 5.  
+      </div>
+                
+      <label class="control-label" for="videolevelInput">Video Rating</label>
+      <div [ngClass]="{'has-error':!updCandidateForm.controls['videolevel'].valid
+                  && updCandidateForm.controls['videolevel'].touched}" >
+        <input id="videolevelInput" class="form-control" #vl type="text" 
+                    formControlName="videolevel" (change)="modifiedVideoLevel(vl.value)"
+                    style="width: 60px;">
+      </div>
+      <div *ngIf="( updCandidateForm.controls['videolevel'].hasError('required')
+        || updCandidateForm.controls['videolevel'].hasError('max')
+        || updCandidateForm.controls['videolevel'].hasError('min'))
+        && updCandidateForm.controls['videolevel'].touched" class="alert alert-danger">
+        You must enter a valid numeric video level from 0 to 5.  
+      </div>
     </div>
-    <label class="control-label" for="phoneInput">Phone</label>
-    <div [ngClass]="{'has-error':!updCandidateForm.controls['phone'].valid
-      && updCandidateForm.controls['phone'].touched}">
-      <input id="phoneInput" class="form-control" #p type="text"  
-      formControlName="phone" (change)="modifiedPhone(p.value)"
-      [formControl]="updCandidateForm.controls['phone']">
-    </div>
-    <div *ngIf="updCandidateForm.controls['phone'].hasError('invalidPhone')
-     && updCandidateForm.controls['phone'].touched" class="alert alert-danger">
-    You must enter a valid phone number.  
-    </div>
-    <label class="control-label" for="emailInput">eMail</label>
-    <div [ngClass]="{'has-error':!updCandidateForm.controls['email'].valid
-      && updCandidateForm.controls['email'].touched}">
-      <input id="emailInput" class="form-control" #e type="text" 
-      formControlName="email" (change)="modifiedeMail(e.value)">
-    </div>
-    <div *ngIf="updCandidateForm.controls['email'].hasError('required')
-     && updCandidateForm.controls['email'].touched" class="alert alert-danger">
-    You must enter a valid email.  
-    </div>
-    <label class="control-label" for="noteInput">Note</label>
-    <div [ngClass]="{'has-error':!updCandidateForm.controls['note'].valid
-      && updCandidateForm.controls['note'].touched}">
-      <input id="noteInput" class="form-control" #n type="text" 
-      formControlName="note" (change)="modifiedNote(n.value)">
-    </div>
-    <div *ngIf="updCandidateForm.controls['note'].hasError('required')
-     && updCandidateForm.controls['note'].touched" class="alert alert-danger">
-    You must enter a candidate note.  
+    <div class="container" [hidden]="submitted">
+      <br>
+      <br>
+      <button class="btn btn-primary" (click)="updCandidate()" 
+        [disabled]="!updCandidateForm.valid">Submit
+      </button>
     </div>
   </div>
 </form>
-<br>
-<div class="container" [hidden]="submitted">
-   <button class="btn btn-primary" (click)="updCandidate()" 
-   [disabled]="!updCandidateForm.valid">Submit</button>
-</div>
-    </div>
-</div>

@@ -12,7 +12,15 @@ import {APP_BASE_HREF,
 
 @Component({
   selector: 'home',
-  templateUrl: './home.html'
+  templateUrl: './home.html',
+  styles: [
+    ` .navbar-nav a {
+      color:black;
+      font-weight:bold;
+      font-size: .80em !important;
+    }
+    `
+  ]
 })
 
 

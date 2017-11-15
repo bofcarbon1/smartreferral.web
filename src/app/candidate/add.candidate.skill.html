@@ -1,0 +1,36 @@
+<h5>Add Candidate Skills</h5>
+<br>  
+<span *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}
+</span>
+<span *ngIf="successMessage" class="alert alert-success">{{successMessage}}
+<a [routerLink]="['/candidate-home/candidate-skill-home', 
+{id : candidateID, name: candidateName}]" 
+[queryParams]="{ }" routerLinkActive="active"> -- Return to Candidate Skills</a>
+</span>
+<div class="row"
+style="border: 1px solid black; background-color:lightgray;">
+    <div class="col-4" [hidden]="submitted">
+        <br>
+        <p>{{candidateName}} currently has: </p>
+        <ul>
+            <li  *ngFor = "let candidateskill of currCandidateSkills">
+                {{candidateskill.skill_Name}}
+            </li>
+        </ul>
+    </div>
+    <div class="col-2" [hidden]="submitted">
+        <label class="control-label" for="skillsInput">Available Skills</label>
+        <br />
+        <ss-multiselect-dropdown [options]="availableskills"
+            [texts]="myTexts" [settings]="mySettings"
+            [(ngModel)]="optionsModel" (ngModelChange)="onChange($event)" >
+        </ss-multiselect-dropdown>
+        <br />
+    </div>
+    <div class="col-2" [hidden]="submitted">
+        <br>
+        <br>
+        <button class="btn btn-primary" (click)="addCandidateSkills()">Submit</button>
+    </div>
+    <br />
+</div>

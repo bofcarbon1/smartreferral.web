@@ -1,0 +1,42 @@
+<h5>Skill Update</h5>
+<br>
+<span *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}
+</span>
+<span *ngIf="successMessage" class="alert alert-success">{{successMessage}}
+<a [routerLink]="['/skill-home']" [queryParams]="{}" routerLinkActive="active"> -- Return to Skills</a>
+</span>
+<form [hidden]="submitted"
+style="border: 1px solid black; background-color:lightgray;">
+  <div class="form-group row" [formGroup]="updSkillForm">
+    <div class="col-6">
+      <label class="control-label" for="nameInput">Skill name</label>
+      <div [ngClass]="{'has-error':!updSkillForm.controls['name'].valid
+      && updSkillForm.controls['name'].touched}">
+        <input id="nameInput" class="form-control" #na type="text" 
+        formControlName="name" (change)="modifiedName(na.value)"
+        style="width: 400px;">
+      </div>
+      <div *ngIf="updSkillForm.controls['name'].hasError('required')
+       && updSkillForm.controls['name'].touched" class="alert alert-danger">
+      You must enter a skill name.  
+      </div>
+    
+      <label class="control-label" for="typeInput">Category</label>
+      <div>
+        <select class="form-control" #c
+        (change)="modifiedCategory(c.value)" style="width: 200px;">
+          <option value={{categoryPreselectText}}>{{categoryPreselectText}}</option>
+          <option *ngFor="let c of allskillcategories" 
+          value={{c.skill_Category_ID}}>{{c.skill_Category_Name}}</option>
+        </select>
+        <br/>
+      </div>
+    </div>
+    <div class="container" [hidden]="submitted">
+      <button class="btn btn-primary" (click)="updSkill()" 
+      [disabled]="!updSkillForm.valid">Submit</button>
+    </div>
+  </div>
+</form>
+
+

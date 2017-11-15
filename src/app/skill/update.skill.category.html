@@ -1,0 +1,29 @@
+<span *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}
+</span>
+<span *ngIf="successMessage" class="alert alert-success">{{successMessage}}
+<a [routerLink]="['/skill-home']" [queryParams]="{}" routerLinkActive="active"> -- Return to Skills</a>
+</span>
+<br>
+<div class="row" style="background-color:lightgray" >
+    <div class="col-md-12">
+<form class="form col-md-4" [hidden]="submitted">
+  <div class="form-group" [formGroup]="updSkillCategoryForm">
+    <label class="control-label" for="nameInput">Skill Category</label>
+    <div [ngClass]="{'has-error':!updSkillCategoryForm.controls['name'].valid
+      && updSkillCategoryForm.controls['name'].touched}">
+      <input id="nameInput" class="form-control" #na type="text" 
+      formControlName="name" (change)="modifiedName(na.value)">
+    </div>
+    <div *ngIf="updSkillCategoryForm.controls['name'].hasError('required')
+     && updSkillCategoryForm.controls['name'].touched" class="alert alert-danger">
+    You must enter a skill category.  
+    </div>
+  </div>
+</form>
+<br>
+<div class="container" [hidden]="submitted">
+   <button class="btn btn-primary" (click)="updSkillCategory()" 
+   [disabled]="!updSkillCategoryForm.valid">Submit</button>
+</div>
+    </div>
+</div>
